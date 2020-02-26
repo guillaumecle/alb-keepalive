@@ -25,7 +25,7 @@ public class Main{
 
 	private static void sleep(String secondsString) throws InterruptedException{
 		int seconds = Integer.parseInt(secondsString);
-		logger.warn("sleeping " + seconds  + "s");
+		logger.info("sleeping " + seconds  + "s");
 		Thread.sleep(seconds * 1_000);
 	}
 
