@@ -16,10 +16,11 @@ public class Main{
 	private static final Log logger = LogFactory.getLog(Main.class);
 
 	public static void main(String[] args) throws ClientProtocolException, IOException, InterruptedException{
+		String url = args[0];
 		try(CloseableHttpClient httpclient = HttpClients.createDefault()){
-			makeRequest(httpclient);
-			sleep(args[0]);
-			makeRequest(httpclient);
+			makeRequest(httpclient, url);
+			sleep(args[1]);
+			makeRequest(httpclient, url);
 		}
 	}
 
@@ -29,8 +30,8 @@ public class Main{
 		Thread.sleep(seconds * 1_000);
 	}
 
-	private static void makeRequest(CloseableHttpClient httpclient) throws ClientProtocolException, IOException{
-		HttpGet httpGet = new HttpGet("https://identity.hotpads.com/identity/datarouter/healthcheck");
+	private static void makeRequest(CloseableHttpClient httpclient, String url) throws ClientProtocolException, IOException{
+		HttpGet httpGet = new HttpGet(url);
 		try(CloseableHttpResponse response1 = httpclient.execute(httpGet)){
 			HttpEntity entity = response1.getEntity();
 			String textResponse = EntityUtils.toString(entity);
